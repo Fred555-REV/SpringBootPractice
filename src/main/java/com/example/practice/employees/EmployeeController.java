@@ -25,8 +25,8 @@ public class EmployeeController {
     }
 
     @GetMapping("/employee")
-    public Employee addEmployee(@RequestParam(value = "name", defaultValue = "Name") String name) {
-        return employeeService.addEmployee(name);
+    public Employee addEmployee(@RequestParam(value = "firstName", defaultValue = "firstName") String firstName, @RequestParam(value = "lastName", defaultValue = "lastName") String lastName) {
+        return employeeService.addEmployee(firstName, lastName);
     }
 
     @GetMapping("/employee/{name}/{id}")

@@ -12,9 +12,9 @@ public class EmployeeService {
     public List<Employee> employees = new ArrayList<>();
 
     {
-        employees.add(new Employee(atomicLong.incrementAndGet(), "Freddy"));
-        employees.add(new Employee(atomicLong.incrementAndGet(), "ExampleName"));
-        employees.add(new Employee(atomicLong.incrementAndGet(), "Freddy"));
+        employees.add(new Employee(atomicLong.incrementAndGet(), "Example", "Name"));
+        employees.add(new Employee(atomicLong.incrementAndGet(), "Name", "Two"));
+        employees.add(new Employee(atomicLong.incrementAndGet(), "Example", "Name"));
     }
 
     public EmployeeService() {
@@ -27,7 +27,7 @@ public class EmployeeService {
     public List<Employee> getEmployee(String name) {
         List<Employee> sameNameEmployee = new ArrayList<>();
         for (Employee employee : employees) {
-            if (employee.getName().equals(name)) {
+            if (employee.getFirstName().equals(name)) {
                 sameNameEmployee.add(employee);
             }
         }
@@ -36,7 +36,7 @@ public class EmployeeService {
 
     public Employee getEmployee(String name, Long id) {
         for (Employee employee : employees) {
-            if (employee.getName().equals(name) && employee.getId().equals(id)) {
+            if (employee.getFirstName().equals(name) && employee.getId().equals(id)) {
                 return employee;
             }
         }
@@ -44,8 +44,8 @@ public class EmployeeService {
         return null;
     }
 
-    public Employee addEmployee(String name) {
-        Employee employee = new Employee(atomicLong.incrementAndGet(), name);
+    public Employee addEmployee(String firstName, String lastName) {
+        Employee employee = new Employee(atomicLong.incrementAndGet(), firstName, lastName);
         employees.add(employee);
         return employee;
     }
