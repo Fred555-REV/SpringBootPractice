@@ -14,6 +14,17 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
+    @GetMapping("/")
+    public String root(){
+        String output = "Hello, the possible routes are:\n" +
+                "/employees\t- to get all employees\n" +
+                "/employee?firstname=(enter first name here)&lastName=(enter last name here)\t - to create and add an employee\n" +
+                "/employee/{name}\t- to get an employee with that name or a list of employees with the same name\n" +
+                "/employee/{name}/{id}\t - to get a specific employee with that name and id";
+        String html = output.replaceAll("(\n)","<br>");
+        return html;
+    }
+
     @GetMapping("/employees")
     public List<Employee> getEmployees() {
         return employeeService.getEmployees();
