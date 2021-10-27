@@ -3,10 +3,10 @@ package com.example.practice.employees;
 import java.util.concurrent.atomic.AtomicLong;
 
 public class Employee {
-    private final AtomicLong id;
+    private final Long id;
     private final String name;
 
-    public Employee(AtomicLong id, String name) {
+    public Employee(Long id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -15,7 +15,7 @@ public class Employee {
         return name;
     }
 
-    public AtomicLong getId() {
+    public Long getId() {
         return id;
     }
 }
