@@ -43,4 +43,10 @@ public class EmployeeService {
         //TODO create exception handler for nulls
         return null;
     }
+
+    public Employee addEmployee(String name) {
+        Employee employee = new Employee(atomicLong.incrementAndGet(), name);
+        employees.add(employee);
+        return employee;
+    }
 }

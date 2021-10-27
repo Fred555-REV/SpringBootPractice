@@ -1,10 +1,7 @@
 package com.example.practice.employees;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -25,6 +22,11 @@ public class EmployeeController {
     @GetMapping("/employee/{name}")
     public List<Employee> getEmployee(@PathVariable(value = "name") String name) {
         return employeeService.getEmployee(name);
+    }
+
+    @GetMapping("/employee")
+    public Employee addEmployee(@RequestParam(value = "name", defaultValue = "Name") String name) {
+        return employeeService.addEmployee(name);
     }
 
     @GetMapping("/employee/{name}/{id}")
