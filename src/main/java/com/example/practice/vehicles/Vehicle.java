@@ -2,7 +2,6 @@ package com.example.practice.vehicles;
 
 import javax.persistence.Entity;
 
-@Entity
 public class Vehicle {
     private Long vin;
     private String make;
