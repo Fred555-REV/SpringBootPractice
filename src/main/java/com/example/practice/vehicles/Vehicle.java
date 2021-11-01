@@ -1,9 +1,15 @@
 package com.example.practice.vehicles;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
+@Entity
 public class Vehicle {
-    private Long vin;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String make;
     private String model;
     private Integer year;
@@ -17,15 +23,15 @@ public class Vehicle {
         this.year = year;
     }
 
-    public Vehicle(Long vin, String make, String model, Integer year) {
-        this.vin = vin;
+    public Vehicle(Long id, String make, String model, Integer year) {
+        this.id = id;
         this.make = make;
         this.model = model;
         this.year = year;
     }
 
-    public Long getVin() {
-        return vin;
+    public Long getId() {
+        return id;
     }
 
     public String getMake() {
