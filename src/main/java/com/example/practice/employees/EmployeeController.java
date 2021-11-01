@@ -15,13 +15,20 @@ public class EmployeeController {
     }
 
     @GetMapping("/")
-    public String root(){
+    public String root() {
         String output = "Hello, the possible routes are:\n" +
                 "/employees\t- to get all employees\n" +
                 "/employee?firstname=(enter first name here)&lastName=(enter last name here)\t - to create and add an employee\n" +
                 "/employee/{name}\t- to get an employee with that name or a list of employees with the same name\n" +
-                "/employee/{name}/{id}\t - to get a specific employee with that name and id";
-        String html = output.replaceAll("(\n)","<br>");
+                "/employee/{name}/{id}\t - to get a specific employee with that name and id\n" +
+                "/vehicles - to get all vehicles\n" +
+                "/vehicles/sort - to sort by make and ?make={make} to search by make\n" +
+                "/vehicles/sort/{year} - to get vehicles by year\n" +
+                "/vehicles/{id} - to get vehicle by id\n" +
+                "/vehicles POST - using body to create vehicle\n" +
+                "/vehicles/{id} PUT - using body to update vehicle by id\n" +
+                "/vehicles/{id} DELETE - to delete a certain vehicle";
+        String html = output.replaceAll("(\n)", "<br>");
         return html;
     }
 
