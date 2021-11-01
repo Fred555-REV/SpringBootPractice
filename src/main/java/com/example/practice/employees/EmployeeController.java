@@ -43,12 +43,12 @@ public class EmployeeController {
     }
 
     @GetMapping("/employee")
-    public Employee addEmployee(@RequestParam(value = "firstName", defaultValue = "firstName") String firstName, @RequestParam(value = "lastName", defaultValue = "lastName") String lastName) {
+    public Employee addEmployee(@RequestParam(name = "firstName", defaultValue = "firstName") String firstName, @RequestParam(value = "lastName", defaultValue = "lastName") String lastName) {
         return employeeService.addEmployee(firstName, lastName);
     }
 
     @GetMapping("/employee/{name}/{id}")
-    public Employee getEmployee(@PathVariable(value = "name") String name, @PathVariable(value = "id") Long id) {
+    public Employee getEmployee(@PathVariable( value = "name") String name, @PathVariable(value = "id") Long id) {
         return employeeService.getEmployee(name, id);
     }
 }

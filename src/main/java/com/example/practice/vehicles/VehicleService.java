@@ -60,9 +60,13 @@ public class VehicleService {
 
     public Vehicle updateVehicle(Vehicle newVehicle, Long id) {
         return repository.findById(id).map(vehicle -> {
-            vehicle.setMake(newVehicle.getMake());
-            vehicle.setModel(newVehicle.getModel());
-            vehicle.setYear(newVehicle.getYear());
+
+            if (!(newVehicle.getMake() == null))
+                vehicle.setMake(newVehicle.getMake());
+            if (!(newVehicle.getModel() == null))
+                vehicle.setModel(newVehicle.getModel());
+            if (!(newVehicle.getYear() == null))
+                vehicle.setYear(newVehicle.getYear());
             return repository.save(vehicle);
         }).orElseGet(() -> repository.save(newVehicle));
     }
