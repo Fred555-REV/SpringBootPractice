@@ -45,4 +45,16 @@ public class Vehicle {
     public Integer getYear() {
         return year;
     }
+
+    public void setMake(String make) {
+        this.make = make;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
 }

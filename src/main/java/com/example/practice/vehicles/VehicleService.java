@@ -3,6 +3,7 @@ package com.example.practice.vehicles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,5 +56,14 @@ public class VehicleService {
             return true;
         }
         return false;
+    }
+
+    public Vehicle updateVehicle(Vehicle newVehicle, Long id) {
+        return repository.findById(id).map(vehicle -> {
+            vehicle.setMake(newVehicle.getMake());
+            vehicle.setModel(newVehicle.getModel());
+            vehicle.setYear(newVehicle.getYear());
+            return repository.save(vehicle);
+        }).orElseGet(() -> repository.save(newVehicle));
     }
 }

@@ -23,7 +23,7 @@ public class VehicleController {
     }
 
     @GetMapping("/sort")
-    public List<Vehicle> getVehiclesByMake(@RequestParam(name = "make",defaultValue = "none") String make) {
+    public List<Vehicle> getVehiclesByMake(@RequestParam(name = "make", defaultValue = "none") String make) {
         return vehicleService.getVehiclesByMake(make);
     }
 
@@ -39,6 +39,11 @@ public class VehicleController {
     @PostMapping
     public Vehicle addVehicle(@RequestBody Vehicle vehicle) {
         return vehicleService.addVehicle(vehicle);
+    }
+
+    @PutMapping("/{id}")
+    public Vehicle updateVehicle(@RequestBody Vehicle vehicle, @PathVariable(name = "id") Long id) {
+        return vehicleService.updateVehicle(vehicle,id);
     }
 
     @DeleteMapping("/{id}")
