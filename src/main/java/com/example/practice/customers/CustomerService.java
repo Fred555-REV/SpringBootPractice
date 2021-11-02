@@ -1,11 +1,14 @@
 package com.example.practice.customers;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class CustomerService {
+    @Autowired
     private CustomerRepository repository;
 
     public Customer getCustomer(Long id) {

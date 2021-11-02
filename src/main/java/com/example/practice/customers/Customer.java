@@ -21,6 +21,13 @@ public class Customer {
         this.wallet = wallet;
     }
 
+    public Customer(Long id, String firstName, String lastName, Integer wallet) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.wallet = wallet;
+    }
+
     public Long getId() {
         return id;
     }
