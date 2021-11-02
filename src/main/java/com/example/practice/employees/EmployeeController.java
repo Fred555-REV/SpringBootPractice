@@ -29,10 +29,10 @@ public class EmployeeController {
                 "/vehicles/{id} PUT - using body to update vehicle by id\n" +
                 "/vehicles/{id} DELETE - to delete a certain vehicle\n" +
                 "/customers - to get all employees\n" +
-                "customers/{id} - to get a customer by id\n" +
-                "customers/{id} POST - to create a customer using the body\n" +
-                "customers/{id} PUT - to update a customer using the body\n" +
-                "customers/{id} DELETE - to delete a character with given id";
+                "/customers/{id} - to get a customer by id\n" +
+                "/customers/{id} POST - to create a customer using the body\n" +
+                "/customers/{id} PUT - to update a customer using the body\n" +
+                "/customers/{id} DELETE - to delete a character with given id";
         String html = output.replaceAll("(\n)", "<br>");
         return html;
     }
