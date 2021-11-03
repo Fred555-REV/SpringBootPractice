@@ -5,6 +5,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class VehicleNotFound extends RuntimeException {
+    public VehicleNotFound() {
+        super("Vehicle Not Found");
+    }
+
     public VehicleNotFound(String s) {
         super(s);
     }

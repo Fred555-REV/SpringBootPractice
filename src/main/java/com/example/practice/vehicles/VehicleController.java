@@ -29,11 +29,7 @@ public class VehicleController {
 
     @GetMapping("/{id}")
     public Vehicle getVehicleById(@PathVariable(name = "id") Long id) {
-        Vehicle vehicle = vehicleService.getVehicleById(id);
-        if (vehicle == null) {
-            throw new VehicleNotFound("Vehicle not found with given vin");
-        }
-        return vehicle;
+        return vehicleService.getVehicleById(id);
     }
 
     @PostMapping
@@ -43,14 +39,12 @@ public class VehicleController {
 
     @PutMapping("/{id}")
     public Vehicle updateVehicle(@RequestBody Vehicle vehicle, @PathVariable(name = "id") Long id) {
-        return vehicleService.updateVehicle(vehicle,id);
+        return vehicleService.updateVehicle(vehicle, id);
     }
 
     @DeleteMapping("/{id}")
     public void destroyVehicleById(@PathVariable Long id) {
-        if (!vehicleService.destroyVehicle(id)) {
-            throw new VehicleNotFound("Vehicle with given vin not found");
-        }
+        vehicleService.destroyVehicle(id);
     }
 
 }

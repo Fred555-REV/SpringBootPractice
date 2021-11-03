@@ -18,25 +18,21 @@ public class CustomerController {
 
     @GetMapping("/{id}")
     public Customer getCustomer(@PathVariable Long id) {
-        Customer customer = service.getCustomer(id);
-        if (customer == null)
-            throw new CustomerNotFound("Customer with given id not found");
-        return customer;
+        return service.getCustomer(id);
     }
 
     @DeleteMapping("/{id}")
     public void deleteCustomer(@PathVariable Long id) {
-        if (!service.deleteCustomer(id))
-            throw new CustomerNotFound("Customer with given id not found");
+        service.deleteCustomer(id);
     }
 
-    @PostMapping("/{id}")
+    @PostMapping
     public Customer addCustomer(@RequestBody Customer customer) {
-        return addCustomer(customer);
+        return service.addCustomer(customer);
     }
 
     @PutMapping("/{id}")
     public Customer updateCustomer(@RequestBody Customer newCustomer, @PathVariable Long id) {
-        return updateCustomer(newCustomer, id);
+        return service.updateCustomer(newCustomer, id);
     }
 }

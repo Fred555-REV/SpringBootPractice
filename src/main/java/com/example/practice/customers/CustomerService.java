@@ -1,7 +1,6 @@
 package com.example.practice.customers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,16 +11,17 @@ public class CustomerService {
     private CustomerRepository repository;
 
     public Customer getCustomer(Long id) {
-        return repository.getById(id);
+        return repository.findById(id).orElseThrow(CustomerNotFound::new);
     }
 
     public List<Customer> getCustomers() {
         return repository.findAll();
     }
 
-    public Boolean deleteCustomer(Long id) {
+    public void deleteCustomer(Long id) {
+        if (repository.findById(id).isEmpty())
+            throw new CustomerNotFound("Customer to delete Not Found");
         repository.deleteById(id);
-        return repository.findById(id).isPresent();
     }
 
     public Customer addCustomer(Customer customer) {
@@ -36,7 +36,7 @@ public class CustomerService {
             if (newCustomer.getLastName() != null)
                 customer.setLastName(newCustomer.getLastName());
             return repository.save(customer);
-        }).orElseGet(() -> repository.save(newCustomer));
+        }).orElseThrow(CustomerNotFound::new);
     }
 
 }

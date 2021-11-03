@@ -1,5 +1,6 @@
 package com.example.practice.vehicles;
 
+import com.example.practice.customers.CustomerNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,8 @@ public class VehicleService {
     }
 
     public Vehicle getVehicleById(Long id) {
-        return repository.findById(id).isPresent() ? repository.getById(id) : null;
+//        return repository.findById(id).isPresent() ? repository.getById(id) : null;
+        return repository.findById(id).orElseThrow(VehicleNotFound::new);
     }
 
     public List<Vehicle> getVehiclesByMake(String make) {
@@ -50,17 +52,14 @@ public class VehicleService {
         return vehicle;
     }
 
-    public boolean destroyVehicle(Long Id) {
-        if (repository.findById(Id).isPresent()) {
-            repository.deleteById(Id);
-            return true;
-        }
-        return false;
+    public void destroyVehicle(Long id) {
+        if (repository.findById(id).isEmpty())
+            throw new VehicleNotFound("Vehicle to delete Not Found");
+        repository.deleteById(id);
     }
 
     public Vehicle updateVehicle(Vehicle newVehicle, Long id) {
         return repository.findById(id).map(vehicle -> {
-
             if (!(newVehicle.getMake() == null))
                 vehicle.setMake(newVehicle.getMake());
             if (!(newVehicle.getModel() == null))
@@ -68,6 +67,6 @@ public class VehicleService {
             if (!(newVehicle.getYear() == null))
                 vehicle.setYear(newVehicle.getYear());
             return repository.save(vehicle);
-        }).orElseGet(() -> repository.save(newVehicle));
+        }).orElseThrow(VehicleNotFound::new);
     }
 }
