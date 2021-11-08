@@ -1,50 +1,59 @@
 package com.example.practice.vehicles;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/vehicles")
 public class VehicleController {
     @Autowired
-    private VehicleService vehicleService;
+    private VehicleService service;
 
     @GetMapping
     public List<Vehicle> getVehicles() {
-        return vehicleService.getVehicles();
+        return service.getVehicles();
     }
 
     @GetMapping("/sort/{year}")
-    public List<Vehicle> getVehiclesByYear(@PathVariable Integer year) {
-        return vehicleService.getVehiclesByYear(year);
+    @ResponseBody
+    public ResponseEntity<List<Vehicle>> getVehiclesByYear(@PathVariable Integer year) {
+        return service.getVehiclesByYear(year);
     }
 
+    @GetMapping("/search/{model}")
+    @ResponseBody
+    public List<Vehicle> getVehiclesByModel(@PathVariable(name = "model") String model) {
+        return service.getVehiclesByModel(model);
+    }
+
+
     @GetMapping("/sort")
-    public List<Vehicle> getVehiclesByMake(@RequestParam(name = "make", defaultValue = "none") String make) {
-        return vehicleService.getVehiclesByMake(make);
+    @ResponseBody
+    public ResponseEntity<List<Vehicle>> getVehiclesByMake(@RequestParam(name = "make", defaultValue = "none") String make) {
+        return service.getVehiclesByMake(make);
     }
 
     @GetMapping("/{id}")
     public Vehicle getVehicleById(@PathVariable(name = "id") Long id) {
-        return vehicleService.getVehicleById(id);
+        return service.getVehicleById(id);
     }
 
     @PostMapping
     public Vehicle addVehicle(@RequestBody Vehicle vehicle) {
-        return vehicleService.addVehicle(vehicle);
+        return service.addVehicle(vehicle);
     }
 
     @PutMapping("/{id}")
     public Vehicle updateVehicle(@RequestBody Vehicle vehicle, @PathVariable(name = "id") Long id) {
-        return vehicleService.updateVehicle(vehicle, id);
+        return service.updateVehicle(vehicle, id);
     }
 
     @DeleteMapping("/{id}")
     public void destroyVehicleById(@PathVariable Long id) {
-        vehicleService.destroyVehicle(id);
+        service.destroyVehicle(id);
     }
 
 }

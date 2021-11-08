@@ -16,6 +16,11 @@ public class CustomerController {
         return service.getCustomers();
     }
 
+    @GetMapping("/search/{firstName}")
+    public List<Customer> getCustomersByFirstName(@PathVariable String firstName) {
+        return service.getCustomersByFirstName(firstName);
+    }
+
     @GetMapping("/{id}")
     public Customer getCustomer(@PathVariable Long id) {
         return service.getCustomer(id);

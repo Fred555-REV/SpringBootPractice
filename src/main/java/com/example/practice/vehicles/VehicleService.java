@@ -3,6 +3,8 @@ package com.example.practice.vehicles;
 import com.example.practice.customers.CustomerNotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,27 +26,16 @@ public class VehicleService {
         return repository.findById(id).orElseThrow(VehicleNotFound::new);
     }
 
-    public List<Vehicle> getVehiclesByMake(String make) {
-        if (make.equals("none")) {
-            return repository.findAll(Sort.by("make"));
-        }
-        List<Vehicle> output = new ArrayList<>();
-        for (Vehicle vehicle : repository.findAll()) {
-            if (vehicle.getMake().toLowerCase(Locale.ROOT).equals(make.toLowerCase(Locale.ROOT))) {
-                output.add(vehicle);
-            }
-        }
-        return output;
+    public ResponseEntity<List<Vehicle>> getVehiclesByMake(String make) {
+        return new ResponseEntity<>(repository.getAllByMake(make), HttpStatus.OK);
     }
 
-    public List<Vehicle> getVehiclesByYear(Integer year) {
-        List<Vehicle> output = new ArrayList<>();
-        for (Vehicle vehicle : repository.findAll()) {
-            if (vehicle.getYear().equals(year)) {
-                output.add(vehicle);
-            }
-        }
-        return output;
+    public ResponseEntity<List<Vehicle>> getVehiclesByYear(Integer year) {
+        return new ResponseEntity<>(repository.getAllByYear(year), HttpStatus.OK);
+    }
+
+    public List<Vehicle> getVehiclesByModel(String model){
+        return repository.findAllByModel(model);
     }
 
     public Vehicle addVehicle(Vehicle vehicle) {

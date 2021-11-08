@@ -24,6 +24,10 @@ public class CustomerService {
         repository.deleteById(id);
     }
 
+    public List<Customer> getCustomersByFirstName(String firstName) {
+        return repository.getAllByFirstName(firstName);
+    }
+
     public Customer addCustomer(Customer customer) {
         repository.save(customer);
         return customer;
