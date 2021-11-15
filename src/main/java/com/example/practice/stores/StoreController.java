@@ -25,10 +25,9 @@ public class StoreController {
         return new ResponseEntity<>(service.getStoreByID(id), HttpStatus.OK);
     }
 
-    @PutMapping("/{id}")
-    @ResponseBody
-    public ResponseEntity<Store> getStoreByID(@PathVariable("id") Long id, @RequestBody Store store) {
-        return new ResponseEntity<>(service.updateStoreByID(id, store), HttpStatus.CREATED);
+    @GetMapping("/search/{name}")
+    public Store getStoreByName(@PathVariable("name") String name) {
+        return service.getStoreByName(name);
     }
 
     @PostMapping
@@ -36,9 +35,15 @@ public class StoreController {
         return service.createStore(store);
     }
 
-    @GetMapping("/search/{name}")
-    public Store getStoreByName(@PathVariable("name") String name) {
-        return service.getStoreByName(name);
+    @PutMapping("/{id}")
+    @ResponseBody
+    public ResponseEntity<Store> getStoreByID(@PathVariable("id") Long id, @RequestBody Store store) {
+        return new ResponseEntity<>(service.updateStoreByID(id, store), HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteStore(@PathVariable Long id){
+        service.deleteStoreById(id);
     }
 
 }

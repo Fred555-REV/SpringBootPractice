@@ -40,4 +40,8 @@ public class StoreService {
             return repository.save(store);
         }).orElseThrow(StoreNotFound::new);
     }
+
+    public void deleteStoreById(Long id) {
+        repository.deleteById(id);
+    }
 }

@@ -17,6 +17,8 @@ public class Store {
     @JoinColumn(name = "store_id",referencedColumnName = "id")
     private List<Vehicle> vehicles;
 
+    public Store(){}
+
     public Store(String name, String address, Integer phoneNumber, List<Vehicle> vehicles) {
         this.name = name;
         this.address = address;
