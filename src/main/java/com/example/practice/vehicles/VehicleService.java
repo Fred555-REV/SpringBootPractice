@@ -34,7 +34,7 @@ public class VehicleService {
         return new ResponseEntity<>(repository.getAllByYear(year), HttpStatus.OK);
     }
 
-    public List<Vehicle> getVehiclesByModel(String model){
+    public List<Vehicle> getVehiclesByModel(String model) {
         return repository.findAllByModel(model);
     }
 
@@ -51,12 +51,9 @@ public class VehicleService {
 
     public Vehicle updateVehicle(Vehicle newVehicle, Long id) {
         return repository.findById(id).map(vehicle -> {
-            if (!(newVehicle.getMake() == null))
-                vehicle.setMake(newVehicle.getMake());
-            if (!(newVehicle.getModel() == null))
-                vehicle.setModel(newVehicle.getModel());
-            if (!(newVehicle.getYear() == null))
-                vehicle.setYear(newVehicle.getYear());
+            if (!(newVehicle.getMake() == null)) vehicle.setMake(newVehicle.getMake());
+            if (!(newVehicle.getModel() == null)) vehicle.setModel(newVehicle.getModel());
+            if (!(newVehicle.getYear() == null)) vehicle.setYear(newVehicle.getYear());
             return repository.save(vehicle);
         }).orElseThrow(VehicleNotFound::new);
     }

@@ -1,9 +1,8 @@
 package com.example.practice.vehicles;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.example.practice.stores.Store;
+
+import javax.persistence.*;
 
 @Entity
 public class Vehicle {
@@ -13,21 +12,26 @@ public class Vehicle {
     private String make;
     private String model;
     private Integer year;
+    @ManyToOne
+    @JoinColumn(name = "store_id",referencedColumnName = "id")
+    private Store store;
 
     public Vehicle() {
     }
 
-    public Vehicle(String make, String model, Integer year) {
+    public Vehicle(String make, String model, Integer year, Store store) {
         this.make = make;
         this.model = model;
         this.year = year;
+        this.store = store;
     }
 
-    public Vehicle(Long id, String make, String model, Integer year) {
-        this.id = id;
-        this.make = make;
-        this.model = model;
-        this.year = year;
+    public Store getStore() {
+        return store;
+    }
+
+    public void setStore(Store store) {
+        this.store = store;
     }
 
     public Long getId() {
