@@ -42,6 +42,7 @@ public class StoreService {
     }
 
     public void deleteStoreById(Long id) {
+        if (!repository.existsById(id)) throw new StoreNotFound();
         repository.deleteById(id);
     }
 }
