@@ -13,7 +13,7 @@ public class Vehicle {
     private String model;
     private Integer year;
     @ManyToOne
-    @JoinColumn(name = "store_id",referencedColumnName = "id")
+    @JoinColumn(name = "store_id", referencedColumnName = "id")
     private Store store;
 
     public Vehicle() {

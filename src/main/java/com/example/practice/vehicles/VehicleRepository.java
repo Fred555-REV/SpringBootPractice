@@ -19,4 +19,7 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
     List<Vehicle> getAllByYear(@Param("year") Integer year);
 
     List<Vehicle> findAllByModel(String model);
+
+
+    List<Vehicle> findAllByStoreId(Long id);
 }

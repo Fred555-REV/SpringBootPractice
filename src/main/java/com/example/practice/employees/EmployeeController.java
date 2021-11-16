@@ -8,12 +8,8 @@ import java.util.List;
 @CrossOrigin
 @RestController
 public class EmployeeController {
-    EmployeeService employeeService;
-
     @Autowired
-    public EmployeeController(EmployeeService employeeService) {
-        this.employeeService = employeeService;
-    }
+    private EmployeeService employeeService;
 
     @GetMapping("/")
     public String root() {
@@ -43,17 +39,17 @@ public class EmployeeController {
         return employeeService.getEmployees();
     }
 
-    @GetMapping("/employees/{name}")
+    @GetMapping("/employee/{name}")
     public List<Employee> getEmployee(@PathVariable(value = "name") String name) {
         return employeeService.getEmployee(name);
     }
 
-    @GetMapping("/employees")
+    @GetMapping("/employee")
     public Employee addEmployee(@RequestParam(name = "firstName", defaultValue = "firstName") String firstName, @RequestParam(value = "lastName", defaultValue = "lastName") String lastName) {
         return employeeService.addEmployee(firstName, lastName);
     }
 
-    @GetMapping("/employees/{name}/{id}")
+    @GetMapping("/employee/{name}/{id}")
     public Employee getEmployee(@PathVariable(value = "name") String name, @PathVariable(value = "id") Long id) {
         return employeeService.getEmployee(name, id);
     }

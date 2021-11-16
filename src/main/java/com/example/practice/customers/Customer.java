@@ -1,9 +1,9 @@
 package com.example.practice.customers;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.example.practice.stores.Store;
+
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Customer {
@@ -13,19 +13,30 @@ public class Customer {
     private String firstName;
     private String lastName;
     private Integer wallet;
+    @ManyToMany
+    @JoinTable(
+            name = "store_customer",
+            joinColumns = @JoinColumn(name = "customer_id"),
+            inverseJoinColumns = @JoinColumn(name = "store_id")
+    )
+    private Set<Store> stores;
 
-    public Customer(){}
-    public Customer(String firstName, String lastName, Integer wallet) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.wallet = wallet;
+    public Customer() {
     }
 
-    public Customer(Long id, String firstName, String lastName, Integer wallet) {
-        this.id = id;
+    public Customer(String firstName, String lastName, Integer wallet, Set<Store> stores) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.wallet = wallet;
+        this.stores = stores;
+    }
+
+    public Set<Store> getStores() {
+        return stores;
+    }
+
+    public void setStores(Set<Store> stores) {
+        this.stores = stores;
     }
 
     public Long getId() {

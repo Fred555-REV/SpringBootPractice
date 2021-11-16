@@ -30,6 +30,11 @@ public class VehicleController {
         return service.getVehiclesByModel(model);
     }
 
+    @GetMapping("/store/{store_id}")
+    public List<Vehicle> getVehiclesByStoreID(@PathVariable("store_id") Long id){
+        return service.getVehiclesByStoreID(id);
+    }
+
 
     @GetMapping("/sort")
     @ResponseBody

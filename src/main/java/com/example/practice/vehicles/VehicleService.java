@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 @Service
 public class VehicleService {
@@ -56,5 +57,9 @@ public class VehicleService {
             if (!(newVehicle.getYear() == null)) vehicle.setYear(newVehicle.getYear());
             return repository.save(vehicle);
         }).orElseThrow(VehicleNotFound::new);
+    }
+
+    public List<Vehicle> getVehiclesByStoreID(Long id) {
+        return repository.findAllByStoreId(id);
     }
 }
