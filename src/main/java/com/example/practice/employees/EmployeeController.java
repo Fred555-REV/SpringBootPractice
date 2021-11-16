@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class EmployeeController {
     EmployeeService employeeService;
@@ -42,17 +43,17 @@ public class EmployeeController {
         return employeeService.getEmployees();
     }
 
-    @GetMapping("/employee/{name}")
+    @GetMapping("/employees/{name}")
     public List<Employee> getEmployee(@PathVariable(value = "name") String name) {
         return employeeService.getEmployee(name);
     }
 
-    @GetMapping("/employee")
+    @GetMapping("/employees")
     public Employee addEmployee(@RequestParam(name = "firstName", defaultValue = "firstName") String firstName, @RequestParam(value = "lastName", defaultValue = "lastName") String lastName) {
         return employeeService.addEmployee(firstName, lastName);
     }
 
-    @GetMapping("/employee/{name}/{id}")
+    @GetMapping("/employees/{name}/{id}")
     public Employee getEmployee(@PathVariable(value = "name") String name, @PathVariable(value = "id") Long id) {
         return employeeService.getEmployee(name, id);
     }
