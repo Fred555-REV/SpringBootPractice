@@ -1,11 +1,13 @@
 package com.example.practice.stores;
 
+import com.example.practice.customers.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @CrossOrigin
 @RestController
@@ -40,6 +42,11 @@ public class StoreController {
     @ResponseBody
     public ResponseEntity<Store> getStoreByID(@PathVariable("id") Long id, @RequestBody Store store) {
         return new ResponseEntity<>(service.updateStoreByID(id, store), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/add/{id}")
+    public Store addCustomers(@PathVariable Long id,@RequestBody Set<Customer> customers){
+        return service.addCustomers(id,customers);
     }
 
     @DeleteMapping("/{id}")

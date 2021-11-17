@@ -2,6 +2,7 @@ package com.example.practice.stores;
 
 import com.example.practice.customers.Customer;
 import com.example.practice.vehicles.Vehicle;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,9 +16,11 @@ public class Store {
     private String name;
     private String address;
     private Integer phoneNumber;
+    @JsonManagedReference
     @OneToMany
     @JoinColumn(name = "store_id", referencedColumnName = "id")
     private List<Vehicle> vehicles;
+    @JsonManagedReference
     @ManyToMany
     @JoinTable(
             name = "store_customer",

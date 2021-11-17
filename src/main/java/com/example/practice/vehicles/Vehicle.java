@@ -1,6 +1,7 @@
 package com.example.practice.vehicles;
 
 import com.example.practice.stores.Store;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 
@@ -12,6 +13,7 @@ public class Vehicle {
     private String make;
     private String model;
     private Integer year;
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "store_id", referencedColumnName = "id")
     private Store store;

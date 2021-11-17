@@ -1,10 +1,12 @@
 package com.example.practice.stores;
 
+import com.example.practice.customers.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class StoreService {
@@ -37,6 +39,7 @@ public class StoreService {
             if (update.getName() != null) store.setName(update.getName());
             if (update.getPhoneNumber() != null) store.setPhoneNumber(update.getPhoneNumber());
             if (update.getVehicles() != null) store.setVehicles(update.getVehicles());
+            if (update.getCustomers() != null) store.setCustomers(update.getCustomers());
             return repository.save(store);
         }).orElseThrow(StoreNotFound::new);
     }
@@ -44,5 +47,11 @@ public class StoreService {
     public void deleteStoreById(Long id) {
         if (!repository.existsById(id)) throw new StoreNotFound();
         repository.deleteById(id);
+    }
+
+    public Store addCustomers(Long id, Set<Customer> customers) {
+        Store store = repository.findById(id).orElseThrow(StoreNotFound::new);
+        store.getCustomers().addAll(customers);
+        return repository.save(store);
     }
 }

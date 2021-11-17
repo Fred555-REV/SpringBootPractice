@@ -1,6 +1,7 @@
 package com.example.practice.customers;
 
 import com.example.practice.stores.Store;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -13,6 +14,7 @@ public class Customer {
     private String firstName;
     private String lastName;
     private Integer wallet;
+    @JsonBackReference
     @ManyToMany
     @JoinTable(
             name = "store_customer",
