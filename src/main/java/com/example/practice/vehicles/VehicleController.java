@@ -31,7 +31,7 @@ public class VehicleController {
     }
 
     @GetMapping("/store/{store_id}")
-    public List<Vehicle> getVehiclesByStoreID(@PathVariable("store_id") Long id){
+    public List<Vehicle> getVehiclesByStoreID(@PathVariable("store_id") Long id) {
         return service.getVehiclesByStoreID(id);
     }
 
@@ -50,6 +50,16 @@ public class VehicleController {
     @PostMapping
     public Vehicle addVehicle(@RequestBody Vehicle vehicle) {
         return service.addVehicle(vehicle);
+    }
+
+    @PostMapping("/location")
+    public Vehicle addLocation(@RequestBody Vehicle update) {
+        return service.addLocation(update);
+    }
+
+    @DeleteMapping("/location/{id}")
+    public void deleteLocation(@PathVariable Long id){
+        service.deleteLocation(id);
     }
 
     @PutMapping("/{id}")

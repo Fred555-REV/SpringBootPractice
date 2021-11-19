@@ -1,6 +1,8 @@
 package com.example.practice.vehicles;
 
 import com.example.practice.customers.CustomerNotFound;
+import com.example.practice.locations.Location;
+import com.example.practice.locations.LocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,9 @@ import java.util.Set;
 public class VehicleService {
     @Autowired
     private VehicleRepository repository;
+
+    @Autowired
+    private LocationRepository locationRepository;
 
     public List<Vehicle> getVehicles() {
         return repository.findAll();
@@ -42,6 +47,26 @@ public class VehicleService {
     public Vehicle addVehicle(Vehicle vehicle) {
         repository.save(vehicle);
         return vehicle;
+    }
+
+    public Vehicle addLocation(Vehicle update) {
+        Vehicle vehicle = repository.findById(update.getId()).orElseThrow(VehicleNotFound::new);
+        if (vehicle.getLocation() != null) {
+            Location location = vehicle.getLocation();
+            location.setAddress(update.getLocation().getAddress());
+            locationRepository.save(location);
+            return vehicle;
+        }
+        vehicle.setLocation(update.getLocation());
+        return repository.save(vehicle);
+    }
+
+    public void deleteLocation(Long id) {
+        repository.findById(id).map(vehicle -> {
+            locationRepository.delete(vehicle.getLocation());
+            vehicle.setLocation(null);
+            return repository.save(vehicle);
+        }).orElseThrow(VehicleNotFound::new);
     }
 
     public void destroyVehicle(Long id) {

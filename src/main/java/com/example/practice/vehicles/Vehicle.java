@@ -1,5 +1,6 @@
 package com.example.practice.vehicles;
 
+import com.example.practice.locations.Location;
 import com.example.practice.stores.Store;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -17,15 +18,26 @@ public class Vehicle {
     @ManyToOne
     @JoinColumn(name = "store_id", referencedColumnName = "id")
     private Store store;
+    @OneToOne
+    private Location location;
 
     public Vehicle() {
     }
 
-    public Vehicle(String make, String model, Integer year, Store store) {
+    public Vehicle(String make, String model, Integer year, Store store, Location location) {
         this.make = make;
         this.model = model;
         this.year = year;
         this.store = store;
+        this.location = location;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     public Store getStore() {
