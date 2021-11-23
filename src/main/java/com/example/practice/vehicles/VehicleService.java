@@ -51,13 +51,11 @@ public class VehicleService {
 
     public Vehicle addLocation(Vehicle update) {
         Vehicle vehicle = repository.findById(update.getId()).orElseThrow(VehicleNotFound::new);
-        if (vehicle.getLocation() != null) {
-            Location location = vehicle.getLocation();
-            location.setAddress(update.getLocation().getAddress());
-            locationRepository.save(location);
-            return vehicle;
-        }
-        vehicle.setLocation(update.getLocation());
+        Location location = update.getLocation();
+//        if (vehicle.getLocation() != null) {
+//        }
+        locationRepository.save(location);
+        vehicle.setLocation(location);
         return repository.save(vehicle);
     }
 

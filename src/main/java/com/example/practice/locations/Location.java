@@ -1,5 +1,7 @@
 package com.example.practice.locations;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +13,8 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String address;
+
+    @JsonIgnoreProperties({"location","store"})
 
     public Location() {
     }

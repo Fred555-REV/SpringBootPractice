@@ -3,6 +3,7 @@ package com.example.practice.vehicles;
 import com.example.practice.locations.Location;
 import com.example.practice.stores.Store;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
@@ -19,6 +20,7 @@ public class Vehicle {
     @JoinColumn(name = "store_id", referencedColumnName = "id")
     private Store store;
     @OneToOne
+    @JsonIgnoreProperties({"vehicle"})
     private Location location;
 
     public Vehicle() {
